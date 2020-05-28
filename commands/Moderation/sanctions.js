@@ -27,6 +27,11 @@ class Sanctions extends Command {
         if(!user){
             return message.channel.send(message.language.get("ERR_INVALID_MEMBER"));
         }
+
+       if(user.user.bot){
+            return message.channel.send(message.language.get("ERR_BOT_USER"));
+        }
+
         let memberData = await this.client.findOrCreateMember({ id: user.id, guildID: message.guild.id });
 
         let embed = new Discord.MessageEmbed()
